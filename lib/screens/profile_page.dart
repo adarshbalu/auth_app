@@ -81,6 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         image: snapshot.data.pictureUrl,
                         placeholder: 'assets/images/user.png',
                         width: 150,
+                        height: 150,
                       ),
                       SizedBox(
                         height: 18,

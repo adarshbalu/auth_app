@@ -69,12 +69,25 @@ class _ProfileEditState extends State<ProfileEdit> {
         final String url = await ref.getDownloadURL();
         print("The download URL is " + url);
         picture = url;
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                content: Text('Image added'),
+              );
+            });
       } else if (storageUploadTask.isInProgress) {
         storageUploadTask.events.listen((event) {
           double percentage = 100 *
               (event.snapshot.bytesTransferred.toDouble() /
                   event.snapshot.totalByteCount.toDouble());
-          print("THe percentage " + percentage.toString());
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: Text('Uploading image : ' + percentage.toString()),
+                );
+              });
         });
 
         StorageTaskSnapshot storageTaskSnapshot =
@@ -83,6 +96,13 @@ class _ProfileEditState extends State<ProfileEdit> {
 
         picture = downloadUrl;
         print("Download URL " + downloadUrl.toString());
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                content: Text('Image added'),
+              );
+            });
       } else {
         if (storageUploadTask.isCanceled) {
           print('Cancelled');
@@ -114,6 +134,13 @@ class _ProfileEditState extends State<ProfileEdit> {
           'gender': gender,
           'picture': picture,
         });
+        showDialog(
+            context: context,
+            builder: (context) {
+              return AlertDialog(
+                content: Text('User added'),
+              );
+            });
         Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) {
           return ProfilePage();
